@@ -1,6 +1,6 @@
-# WordPress Plugin Boilerplate
+# Save My Place
 
-A standardized, organized, object-oriented foundation for building high-quality WordPress Plugins.
+A WordPress Plugin to let your users save their place in an article.
 
 ## Contents
 
