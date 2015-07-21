@@ -29,4 +29,66 @@
 	 * be doing this, we should try to minimize doing that in our own work.
 	 */
 
+	 // _exists
+	 // _last_updated
+	 // _last_depth
+	 // _page_height
+	 // _page_width
+
+	var SaveMyPlace = SaveMyPlace || {
+		exists: 			false,
+		uid: 					null,
+		last_updated: null,
+		last_depth: 	null,
+		page_height: 	null,
+		page_width: 	null
+	};
+
+	SaveMyPlace.blastOff = function(){
+	  console.log('Working');
+	  this.getUID();
+		this.checkLocalStorage();
+	  if ( this.exists != false ){
+	  	this.getLastSettings();
+	  	this.promptOffer();
+	  }
+	}
+
+
+	SaveMyPlace.getUID = function(){
+		var len = location.href.length;
+		var beg = location.host.slice(0,3);
+		var end = location.href.slice(len-3, len);
+		this.uid = beg + len + end;
+	}
+
+	SaveMyPlace.checkLocalStorage = function(){
+	  if( localStorage.getItem(this.uid + '_exists') != null ){
+		  this.exist = true;
+	  }
+	}
+
+	SaveMyPlace.getLastSettings = function(){
+		var u = this.uid;
+		this.last_updated = localStorage.getItem(u + '_last_updated');
+		this.last_depth 	= localStorage.getItem(u + '_last_depth');
+		this.page_height 	= localStorage.getItem(u + '_page_height');
+		this.page_width 	= localStorage.getItem(u + '_page_width');
+	}
+
+	SaveMyPlace.promptOffer = function(){
+		// Create the template and display
+		$('').on('click', function(){
+			this.moveToSavedSpot();
+		})
+	}
+
+	SaveMyPlace.moveToSavedSpot = function(){}
+
+	$(document).on('load', function(){
+	  SaveMyPlace.blastOff();
+	});
+
+
+
 })( jQuery );
